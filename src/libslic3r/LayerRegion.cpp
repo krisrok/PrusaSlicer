@@ -113,13 +113,13 @@ void LayerRegion::make_perimeters(const SurfaceCollection &slices, SurfaceCollec
 void LayerRegion::process_external_surfaces(const Layer *lower_layer, const Polygons *lower_layer_covered)
 {
     const bool      has_infill = this->region()->config().fill_density.value > 0.;
-    const float		margin 	   = float(scale_(EXTERNAL_INFILL_MARGIN));
+    const float		margin = scale_(this->region()->config().external_infill_margin.value);
 
 #ifdef SLIC3R_DEBUG_SLICE_PROCESSING
     export_region_fill_surfaces_to_svg_debug("3_process_external_surfaces-initial");
 #endif /* SLIC3R_DEBUG_SLICE_PROCESSING */
 
-    // 1) Collect bottom and bridge surfaces, each of them grown by a fixed 3mm offset
+    // 1) Collect bottom and bridge surfaces, each of them grown by an offset given by external_infill_margin
     // for better anchoring.
     // Bottom surfaces, grown.
     Surfaces                    bottom;

@@ -998,15 +998,15 @@ void PrintObject::process_external_surfaces()
 		}
 	    BOOST_LOG_TRIVIAL(debug) << "Collecting surfaces covered with extrusions in parallel - start";
 	    surfaces_covered.resize(m_layers.size() - 1, Polygons());
-    	auto unsupported_width = - float(scale_(0.3 * EXTERNAL_INFILL_MARGIN));
 	    tbb::parallel_for(
 	        tbb::blocked_range<size_t>(0, m_layers.size() - 1),
-	        [this, &surfaces_covered, &layer_expansions_and_voids, unsupported_width](const tbb::blocked_range<size_t>& range) {
+	        [this, &surfaces_covered, &layer_expansions_and_voids](const tbb::blocked_range<size_t>& range) {
 	            for (size_t layer_idx = range.begin(); layer_idx < range.end(); ++ layer_idx)
 	            	if (layer_expansions_and_voids[layer_idx + 1]) {
 		                m_print->throw_if_canceled();
 		                Polygons voids;
 		                for (const LayerRegion *layerm : m_layers[layer_idx]->regions()) {
+                            auto unsupported_width = -float(scale_(0.3 * layerm->region()->config().external_infill_margin.value));
 		                	if (layerm->region()->config().fill_density.value == 0.)
 		                		for (const Surface &surface : layerm->fill_surfaces.surfaces)
 		                			// Shrink the holes, let the layer above expand slightly inside the unsupported areas.

@@ -1235,6 +1235,16 @@ void PrintConfigDef::init_fff_params()
     def->mode = comExpert;
     def->set_default_value(new ConfigOptionBool(false));
 
+    def = this->add("external_infill_margin", coFloat);
+    def->label = L("External infill margin");
+    def->tooltip = L("Insets top layer surfaces underneath structures on top. "
+                    "Lower this value to have more continous infill inside of interface areas (think of towers on a base plate). "
+                    "Set this value higher to have more top infill underneath. ");
+    def->mode = comExpert;
+    def->sidetext = L("mm");
+    def->min = 0;
+    def->set_default_value(new ConfigOptionFloat(3.f));
+
     def = this->add("infill_only_where_needed", coBool);
     def->label = L("Only infill where needed");
     def->category = L("Infill");

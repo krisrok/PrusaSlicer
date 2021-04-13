@@ -631,6 +631,7 @@ public:
     ConfigOptionInt                 infill_every_layers;
     ConfigOptionFloatOrPercent      infill_overlap;
     ConfigOptionFloat               infill_speed;
+    ConfigOptionFloat               external_infill_margin;
     // Ironing options
     ConfigOptionBool 				ironing;
     ConfigOptionEnum<IroningType> 	ironing_type;
@@ -688,6 +689,7 @@ protected:
         OPT_PTR(infill_every_layers);
         OPT_PTR(infill_overlap);
         OPT_PTR(infill_speed);
+        OPT_PTR(external_infill_margin);
         OPT_PTR(ironing);
         OPT_PTR(ironing_type);
         OPT_PTR(ironing_flowrate);
