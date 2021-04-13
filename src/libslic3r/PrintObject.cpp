@@ -621,7 +621,8 @@ bool PrintObject::invalidate_state_by_config_options(
             || opt_key == "solid_infill_extruder"
             || opt_key == "infill_extrusion_width"
             || opt_key == "ensure_vertical_shell_thickness"
-            || opt_key == "bridge_angle") {
+            || opt_key == "bridge_angle"
+            || opt_key == "external_infill_margin") {
             steps.emplace_back(posPrepareInfill);
         } else if (
                opt_key == "top_fill_pattern"
